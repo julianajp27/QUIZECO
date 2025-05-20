@@ -1,0 +1,110 @@
+
+#jogo QuizEco 
+
+def tocar_som(nome_som):
+    # Simulação de sons no terminal
+    sons = {
+        "inicio": "🔊 Som de início...",
+        "acerto": "🔊 Som de acerto!",
+        "erro": "🔊 Som de erro!",
+        "fim": "🔊 Som de fim de jogo."
+    }
+    print(sons.get(nome_som, ""))
+
+
+def obter_dados_usuario():
+    print("🌱 Bem-vindo! Vamos iniciar o conhecimento em sustentabilidade?\n")
+    nome = input("Qual seu nome? ")
+    idade = input("Digite sua idade: ")
+    cidade_estado = input("Digite sua cidade e Estado: ")
+    email = input("Digite seu e-mail: ")
+    return nome, idade, cidade_estado, email
+
+
+def jogo_quizeco():
+    perguntas = [
+        {
+            "pergunta": "Reciclar papel ajuda a salvar árvores.",
+            "resposta": True,
+            "curiosidade": "Uma tonelada de papel reciclado pode salvar até 20 árvores."
+        },
+        {
+            "pergunta": "Energia solar é uma fonte de energia poluente.",
+            "resposta": False,
+            "curiosidade": "A energia solar é limpa, renovável e não emite gases poluentes."
+        },
+        {
+            "pergunta": "Os créditos de carbono podem beneficiar empresas sustentáveis.",
+            "resposta": True,
+            "curiosidade": "Empresas como a Natura vendem créditos de carbono ao adotarem práticas ecológicas."
+        },
+        {
+            "pergunta": "Jogar lixo na rua não prejudica o meio ambiente.",
+            "resposta": False,
+            "curiosidade": "O lixo pode entupir bueiros, causar enchentes e poluir rios."
+        },
+        {
+            "pergunta": "Vidro é um material que não pode ser reciclado.",
+            "resposta": False,
+            "curiosidade": "O vidro pode ser reciclado infinitamente sem perder sua qualidade."
+        },
+        {
+            "pergunta": "Plantar árvores ajuda a combater as mudanças climáticas.",
+            "resposta": True,
+            "curiosidade": "Uma árvore pode absorver até 150 kg de CO₂ por ano."
+        },
+        {
+            "pergunta": "Desmatamento contribui para o aumento do efeito estufa.",
+            "resposta": True,
+            "curiosidade": "As florestas absorvem CO₂; ao serem destruídas, liberam esse gás na atmosfera."
+        },
+        {
+            "pergunta": "O plástico se decompõe rapidamente na natureza.",
+            "resposta": False,
+            "curiosidade": "O plástico pode levar mais de 400 anos para se decompor no meio ambiente."
+        },
+        {
+            "pergunta": "Água doce é um recurso abundante no planeta.",
+            "resposta": False,
+            "curiosidade": "Menos de 1% da água do planeta está disponível para consumo humano."
+        },
+        {
+            "pergunta": "Reutilizar materiais ajuda na preservação dos recursos naturais.",
+            "resposta": True,
+            "curiosidade": "A reutilização reduz a necessidade de extração de novos recursos como madeira e minérios."
+        }
+    ]
+
+    nome, idade, cidade_estado, email = obter_dados_usuario()
+    tocar_som("inicio")
+    print(f"\nIniciando o QuizEco para {nome} ({idade} anos, {cidade_estado}) - {email}\n")
+
+    pontuacao = 0
+
+    for i, p in enumerate(perguntas):
+        print(f"Pergunta {i + 1}: {p['pergunta']} (V/F)")
+        resposta = input("Sua resposta: ").strip().upper()
+        resposta_bool = resposta == "V"
+
+        if resposta_bool == p["resposta"]:
+            print("✅ Resposta correta!\n")
+            tocar_som("acerto")
+            pontuacao += 1
+        else:
+            print("❌ Resposta incorreta.\n")
+            tocar_som("erro")
+
+        print(f"💡 Curiosidade: {p['curiosidade']}\n")
+
+    print(f"\n🏁 Fim de jogo, {nome}! Sua pontuação: {pontuacao}/{len(perguntas)}")
+    tocar_som("fim")
+
+    jogar_novamente = input("Deseja jogar novamente? (S/N): ").strip().upper()
+    if jogar_novamente == "S":
+        jogo_quizeco()
+    else:
+        print("Obrigado por jogar o QuizEco! 🌎")
+
+
+# Executar o jogo
+jogo_quizeco()
